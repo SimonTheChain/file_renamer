@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# File Renamer
+# Filename Creator
 #
 # Author: Simon Lachaîne
 
@@ -37,6 +37,8 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         self.resolution_combo.currentIndexChanged.connect(self.set_resolution)
         self.extension_combo.currentIndexChanged.connect(self.set_extension)
+
+        self.copy_btn.clicked.connect(self.copy_filename)
 
         self.default_ma.toggle()
 
@@ -127,13 +129,32 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         return self.set_results()
 
     def set_resolution(self):
-        try:
-            filename["resolution"] = \
-            [y for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0]
-            self.set_results()
+        if self.default_ma.isChecked():
+            try:
+                filename["resolution"] = \
+                    [y for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0]
+                self.set_results()
 
-        except IndexError:
-            return
+            except IndexError:
+                return
+
+        elif self.default_mezz.isChecked():
+            try:
+                filename["resolution"] = \
+                    [z for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0]
+                self.set_results()
+
+            except IndexError:
+                return
+
+        elif self.default_custom.isChecked():
+            try:
+                filename["resolution"] = \
+                [x for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0]
+                self.set_results()
+
+            except IndexError:
+                return
 
     def set_extension(self):
         filename["extension"] = self.extension_combo.currentText()
@@ -151,6 +172,9 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         if self.default_mezz.isChecked():
             self.validate_mezz()
 
+        if self.default_custom.isChecked():
+            self.validate_custom()
+
     def validate_ma(self):
         self.validation_text.clear()
 
@@ -167,6 +191,8 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             except ValueError:
                 self.validation_text.appendPlainText("Reel # is not a valid number.")
 
+        self.character_count()
+
     def validate_mezz(self):
         self.validation_text.clear()
 
@@ -182,6 +208,34 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
             except ValueError:
                 self.validation_text.appendPlainText("Reel # is not a valid number.")
+
+        self.character_count()
+
+    def validate_custom(self):
+        self.validation_text.clear()
+
+        if not filename["title"]:
+            self.validation_text.appendPlainText("Title missing.")
+
+        if not filename["reel"]:
+            self.validation_text.appendPlainText("Reel # missing.")
+
+        else:
+            try:
+                int(filename["reel"])
+
+            except ValueError:
+                self.validation_text.appendPlainText("Reel # is not a valid number.")
+
+        self.character_count()
+
+    def copy_filename(self):
+        clipboard = QtGui.QApplication.clipboard()
+        clipboard.clear()
+        clipboard.setText(self.results_line.text())
+
+    def character_count(self):
+        self.lcd.display(len(self.results_line.text()))
 
 
 def main():
