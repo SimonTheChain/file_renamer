@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>999</width>
-    <height>777</height>
+    <height>679</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Filename Creator</string>
+   <string>File Renamer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -629,15 +629,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="audio_config1">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="add_config_btn">
            <property name="font">
             <font>
@@ -679,7 +670,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_23">
          <item>
-          <layout class="QHBoxLayout" name="audio_lyt"/>
+          <layout class="QGridLayout" name="audio_lyt"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_22">
@@ -1225,7 +1216,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="type_combo">
+          <widget class="QComboBox" name="content_combo">
            <property name="font">
             <font>
              <pointsize>10</pointsize>
@@ -1493,7 +1484,7 @@
      <x>0</x>
      <y>0</y>
      <width>999</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
