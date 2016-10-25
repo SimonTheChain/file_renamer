@@ -1,3 +1,11 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# File Renamer - Lists
+#
+# Author: Simon Lachaîne
+
+
 CUSTOM_NOTES = [
     ("", "", ""),
     ("Airline", "AIR", "AIR"),
@@ -81,6 +89,22 @@ CUSTOM_CONTENT = [
 ]
 
 
+CODECS = [
+    ("Audio", "AUDIO"),
+    ("IMF", "IMF"),
+    ("JPEG", "JPEG"),
+    ("MPEG", "MPEG"),
+    ("MXF", "MXF"),
+    ("ProRes 422", "PR42"),
+    ("ProRes 422 HQ", "PRHQ"),
+    ("ProRes 422 LT", "PRLT"),
+    ("ProRes 422 Proxy", "PRPX"),
+    ("ProRes 4444", "PR44"),
+    ("ProRes 4444 XQ", "PRXQ"),
+    ("Uncompress", "UNC")
+]
+
+
 MA_RESOLUTIONS = [
     "1920x1080",
     "1280x720",
@@ -104,6 +128,54 @@ CUSTOM_RESOLUTIONS = [
     ("4K", "4K", "4K"),
     ("2K", "2K", "2K"),
     ("UHD", "UHD", "UHD"),
+]
+
+
+RATIOS = [
+    ("2.40:1", "240"),
+    ("2.39:1", "239"),
+    ("2.35:1", "235"),
+    ("1.85:1", "185"),
+    ("1.78:1", "178"),
+    ("1.66:1", "166"),
+    ("1.33:1", "133"),
+]
+
+
+SPEED = [
+    ("23.98p", "2398p"),
+    ("24p", "24p"),
+    ("25p", "25p"),
+    ("25i", "25i"),
+    ("29.97i Drop Frame", "2997i-DF"),
+    ("29.97i Non-Drop Frame", "2997i-NDF"),
+    ("29.97p Drop Frame", "2997p-DF"),
+    ("29.97p Non-Drop Frame", "2997p-NDF"),
+    ("30p", "30p"),
+    ("30i", "30i"),
+    ("48p", "48p"),
+    ("50i", "50i"),
+    ("59.94i Drop Frame", "5994i-DF"),
+    ("59.94i Non-Drop Frame", "5994i-NDF"),
+    ("59.94p Drop Frame", "5994p-DF"),
+    ("59.94p Non-Drop Frame", "5994p-NDF"),
+    ("60p", "60p"),
+    ("60i", "60i")
+]
+
+
+SUB_NOTES = [
+    ("", ""),
+    ("CC - Full (dialogues & Inserts)", "CC_FULL"),
+    ("CC - Partial Subtitles", "CC_PART"),
+    ("CC - Dialogues only", "CC_DIA"),
+    ("CC - Full with hearing-impaired details", "CC_SDH"),
+    ("CC - Narratives", "CC_NAR"),
+    ("Subtitles - Full (dialogues & Inserts)", "SUB_FULL"),
+    ("Subtitles - Partial Subtitles", "SUB_PART"),
+    ("Subtitles - Dialogues only", "SUB_DIA"),
+    ("Subtitles - Full with hearing-impaired details", "SUB_SDH"),
+    ("Subtitles - Narratives", "SUB_NAR"),
 ]
 
 
@@ -138,6 +210,16 @@ CUSTOM_EXTENSIONS = [
 ]
 
 
+FACILITY = [
+    ("Montréal", "MTL"),
+    ("Pinewood", "PNW"),
+    ("Sydney", "SYD"),
+    ("Glendale", "GLE"),
+    ("Toronto", "TRO"),
+    ("Bangalore", "BGR"),
+]
+
+
 AUDIO_CONFIGS = [
     ("5.1 Surround", "51"),
     ("7.1 Surround", "71"),
@@ -161,4 +243,84 @@ AUDIO_CONFIGS = [
     ("Stereo Effects", "STFX"),
     ("5.1 Music & Effects", "51ME"),
     ("5.1 Unconventional", "51x")
+]
+
+
+LANGUAGES = [
+    ("N/A", "xx", "XX"),
+    ("Afrikaans", "af", "AF"),
+    ("Arabic", "ar", "AR"),
+    ("Bosnian", "bs", "BS"),
+    ("Bulgarian", "bg", "BG"),
+    ("Cantonese (script)", "yueHant", "yueHant"),
+    ("Cantonese (spoken)", "yue", "YUE"),
+    ("Catalan", "ca", "CA"),
+    ("Croatian", "hr", "HR"),
+    ("Czech", "cs", "CS"),
+    ("Danish", "da", "DA"),
+    ("Dutch (Belgium)", "nlBE", "nlBE"),
+    ("Dutch (Netherlands)", "nlNL", "nlNL"),
+    ("English", "en", "----"),
+    ("English (Australia)", "enAU", "enAU"),
+    ("English (Canada)", "enCA", "enCA"),
+    ("English (Ireland)", "enIE", "enIE"),
+    ("English (New Zealand)", "enNZ", "enNZ"),
+    ("English (United Kingdom)", "enGB", "enGB"),
+    ("English (United States)", "enUS", "enUS"),
+    ("Estonian", "et", "ET"),
+    ("Fārsi", "fa", "FA"),
+    ("Finnish", "fi", "FI"),
+    ("Flemmish", "vl", "VL"),
+    ("French", "fr", "----"),
+    ("French (Belgium)", "frBE", "frBE"),
+    ("French (Canada)", "frCA", "frCA"),
+    ("French (France)", "frFR", "frFR"),
+    ("French (Switzerland)", "frCH", "frCH"),
+    ("German (Austria)", "deAT", "deAT"),
+    ("German (Germany)", "deDE", "deDE"),
+    ("German (Switzerland)", "deCH", "deCH"),
+    ("Greek", "el", "EL"),
+    ("Greek (Cyprus)", "elCY", "elCY"),
+    ("Hebrew", "he", "HE"),
+    ("Hindi", "hi", "HI"),
+    ("Hungarian", "hu", "HU"),
+    ("Icelandic", "is", "IS"),
+    ("Indonesian", "id", "ID"),
+    ("Inuktitut", "iu", "IU"),
+    ("Italian", "it", "IT"),
+    ("Japanese", "ja", "JA"),
+    ("Kazakh", "kk", "KK"),
+    ("Korean", "ko", "KO"),
+    ("Lao", "lo", "LO"),
+    ("Latvian", "lv", "LV"),
+    ("Lithuanian", "lt", "LT"),
+    ("Luxembourgish", "lb", "LB"),
+    ("Malay", "ms", "MS"),
+    ("Maltese", "mt", "MT"),
+    ("Mandarin (simplified script)", "cmnHans", "cmnHans"),
+    ("Mandarin (spoken)", "cmn", "CMN"),
+    ("Mandarin (traditional script)", "cmnHant", "cmnHant"),
+    ("Norwegian", "no", "NO"),
+    ("Polish", "pl", "PL"),
+    ("Portuguese (Brazil)", "ptBR", "ptBR"),
+    ("Portuguese (Portugal)", "ptPT", "ptPT"),
+    ("Romanian", "ro", "RO"),
+    ("Russian", "ru", "RU"),
+    ("Serbian", "sr", "SR"),
+    ("Slovak", "sk", "SK"),
+    ("Slovenian", "sl", "SL"),
+    ("Spanish (Latin America)", "es419", "es419"),
+    ("Spanish (Mexico)", "esMX", "esMX"),
+    ("Spanish (Spain)", "esES", "esES"),
+    ("Swahili", "sw", "SW"),
+    ("Swedish", "sv", "SV"),
+    ("Tagalog", "tl", "TL"),
+    ("Tamil", "ta", "TA"),
+    ("Telugu", "te", "TE"),
+    ("Thai", "th", "TH"),
+    ("Turkish", "tr", "TR"),
+    ("Ukrainian", "uk", "UK"),
+    ("Urdu", "ur", "UR"),
+    ("Vietnamese", "vi", "VI"),
+    ("Zulu", "zu", "ZU"),
 ]
