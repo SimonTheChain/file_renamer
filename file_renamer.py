@@ -42,6 +42,31 @@ filename = OrderedDict([
 ])
 
 
+filename_mezz = OrderedDict([
+    ("title", ""),
+    ("year", ""),
+    ("notes", ""),
+    ("content", ""),
+    ("trailer_nb", ""),
+    ("trailer_pass", ""),
+    ("season_nb", ""),
+    ("episode_nb", ""),
+    ("codec", ""),
+    ("resolution", ""),
+    ("ratio", ""),
+    ("speed", ""),
+    ("audio_language", ""),
+    ("audio_config", ""),
+    ("sub_language", ""),
+    ("sub_notes", ""),
+    ("reel", ""),
+    ("date", ""),
+    ("facility", ""),
+    ("version", ""),
+    ("extension", ""),
+])
+
+
 class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def __init__(self, parent=None):
         super(FileRenamerApp, self).__init__(parent)
@@ -398,7 +423,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             filename["title"] = str(self.title_line.text()).upper().replace(" ", "") + "_"
 
         elif self.default_mezz.isChecked():
-            filename["title"] = str(self.title_line.text()).lower().replace(" ", "")
+            filename_mezz["title"] = str(self.title_line.text()).lower().replace(" ", "")
 
         elif self.default_custom.isChecked():
             filename["title"] = self.title_line.text()
@@ -410,7 +435,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             filename["year"] = str(self.year_lbl.date().toPyDate())[:4] + "_"
 
         elif self.default_mezz.isChecked():
-            filename["year"] = ""
+            filename_mezz["year"] = ""
 
         elif self.default_custom.isChecked():
             filename["year"] = str(self.year_lbl.date().toPyDate())[:4] + "_"
@@ -429,7 +454,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["notes"] = \
+                filename_mezz["notes"] = \
                     [z for x, y, z in app_lists.CUSTOM_NOTES if x == self.notes_combo.currentText()][0]
                 self.set_results()
 
@@ -457,7 +482,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["content"] = \
+                filename_mezz["content"] = \
                     [z for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0]
                 self.set_results()
 
@@ -494,7 +519,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             filename["reel"] = "R" + str(self.reel_line.text()).replace(" ", "") + "_"
 
         elif self.default_mezz.isChecked():
-            filename["reel"] = str(self.reel_line.text()).replace(" ", "")
+            filename_mezz["reel"] = str(self.reel_line.text()).replace(" ", "")
 
         elif self.default_custom.isChecked():
             filename["reel"] = self.reel_line.text()
@@ -513,7 +538,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["codec"] = \
+                filename_mezz["codec"] = \
                     [y for x, y in app_lists.CODECS if x == self.codec_combo.currentText()][0]
                 self.set_results()
 
@@ -541,7 +566,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["speed"] = \
+                filename_mezz["speed"] = \
                     [y for x, y in app_lists.SPEED if x == self.speed_combo.currentText()][0]
                 self.set_results()
 
@@ -569,7 +594,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["audio_language"] = \
+                filename_mezz["audio_language"] = \
                     [z for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0]
                 self.set_results()
 
@@ -597,7 +622,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["sub_language"] = \
+                filename_mezz["sub_language"] = \
                     [y for x, y, z in app_lists.LANGUAGES if x == self.sub_language_combo.currentText()][0]
                 self.set_results()
 
@@ -625,7 +650,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["sub_notes"] = \
+                filename_mezz["sub_notes"] = \
                     [y for x, y in app_lists.SUB_NOTES if x == self.sub_notes_combo.currentText()][0]
                 self.set_results()
 
@@ -653,7 +678,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["resolution"] = \
+                filename_mezz["resolution"] = \
                     [z for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0]
                 self.set_results()
 
@@ -681,7 +706,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["ratio"] = \
+                filename_mezz["ratio"] = \
                     [y for x, y in app_lists.RATIOS if x == self.ratio_combo.currentText()][0]
                 self.set_results()
 
@@ -719,7 +744,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         elif self.default_mezz.isChecked():
             try:
-                filename["facility"] = \
+                filename_mezz["facility"] = \
                     [y for x, y in app_lists.FACILITY if x == self.facility_combo.currentText()][0]
                 self.set_results()
 
@@ -776,6 +801,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         return self.set_results()
 
     def set_results(self):
+        # if self.default_ma.isChecked():
         temp_filename = ""
         self.results_line.clear()
 
