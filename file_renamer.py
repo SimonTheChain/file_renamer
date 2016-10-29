@@ -77,6 +77,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         self.setupUi(self)
 
         filename["date"] = str(datetime.date.today()).replace("-", "") + "-"
+        filename_mezz["date"] = str(datetime.date.today()).replace("-", "") + "-"
 
         self.default_ma.toggled.connect(self.set_default_ma)
         self.default_mezz.toggled.connect(self.set_default_mezz)
@@ -423,7 +424,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             filename["title"] = str(self.title_line.text()).upper().replace(" ", "") + "_"
 
         elif self.default_mezz.isChecked():
-            filename_mezz["title"] = str(self.title_line.text()).lower().replace(" ", "")
+            filename_mezz["title"] = str(self.title_line.text()).lower().replace(" ", "_") + "_"
 
         elif self.default_custom.isChecked():
             filename["title"] = self.title_line.text()
@@ -483,7 +484,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         elif self.default_mezz.isChecked():
             try:
                 filename_mezz["content"] = \
-                    [z for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0]
+                    [z for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0] + "_"
                 self.set_results()
 
             except IndexError:
@@ -499,19 +500,51 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
                 return
     
     def set_trailer_nb(self):
-        filename["trailer_nb"] = str(self.trailer_nb_line.text())
+        if self.default_ma.isChecked():
+            filename["trailer_nb"] = str(self.trailer_nb_line.text())
+
+        elif self.default_mezz.isChecked():
+            filename_mezz["trailer_nb"] = str(self.trailer_nb_line.text())
+
+        elif self.default_custom.isChecked():
+            filename["trailer_nb"] = str(self.trailer_nb_line.text())
+
         return self.set_results()
 
     def set_trailer_pass(self):
-        filename["trailer_pass"] = str(self.trailer_pass_line.text())
+        if self.default_ma.isChecked():
+            filename["trailer_pass"] = str(self.trailer_pass_line.text())
+
+        elif self.default_mezz.isChecked():
+            filename_mezz["trailer_pass"] = str(self.trailer_pass_line.text())
+
+        elif self.default_custom.isChecked():
+            filename["trailer_pass"] = str(self.trailer_pass_line.text())
+
         return self.set_results()
 
     def set_season_nb(self):
-        filename["season_nb"] = str(self.season_nb_line.text())
+        if self.default_ma.isChecked():
+            filename["season_nb"] = str(self.season_nb_line.text())
+
+        elif self.default_mezz.isChecked():
+            filename_mezz["season_nb"] = str(self.season_nb_line.text())
+
+        elif self.default_custom.isChecked():
+            filename["season_nb"] = str(self.season_nb_line.text())
+
         return self.set_results()
 
     def set_episode_nb(self):
-        filename["episode_nb"] = str(self.episode_nb_line.text())
+        if self.default_ma.isChecked():
+            filename["episode_nb"] = str(self.episode_nb_line.text())
+
+        elif self.default_mezz.isChecked():
+            filename_mezz["episode_nb"] = str(self.episode_nb_line.text())
+
+        elif self.default_custom.isChecked():
+            filename["episode_nb"] = str(self.episode_nb_line.text())
+
         return self.set_results()
 
     def set_reel(self):
@@ -539,7 +572,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         elif self.default_mezz.isChecked():
             try:
                 filename_mezz["codec"] = \
-                    [y for x, y in app_lists.CODECS if x == self.codec_combo.currentText()][0]
+                    [y for x, y in app_lists.CODECS if x == self.codec_combo.currentText()][0].lower() + "_"
                 self.set_results()
 
             except IndexError:
@@ -567,7 +600,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         elif self.default_mezz.isChecked():
             try:
                 filename_mezz["speed"] = \
-                    [y for x, y in app_lists.SPEED if x == self.speed_combo.currentText()][0]
+                    [y for x, y in app_lists.SPEED if x == self.speed_combo.currentText()][0] + "_"
                 self.set_results()
 
             except IndexError:
@@ -595,7 +628,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         elif self.default_mezz.isChecked():
             try:
                 filename_mezz["audio_language"] = \
-                    [z for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0]
+                    [z for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "-"
                 self.set_results()
 
             except IndexError:
@@ -707,7 +740,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         elif self.default_mezz.isChecked():
             try:
                 filename_mezz["ratio"] = \
-                    [y for x, y in app_lists.RATIOS if x == self.ratio_combo.currentText()][0]
+                    [y for x, y in app_lists.RATIOS if x == self.ratio_combo.currentText()][0] + "_"
                 self.set_results()
 
             except IndexError:
@@ -723,12 +756,26 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
                 return
 
     def set_version(self):
-        filename["version"] = str(self.version_line.text())
+        if self.default_ma.isChecked():
+            filename["version"] = str(self.version_line.text())
+
+        elif self.default_mezz.isChecked():
+            filename_mezz["version"] = str(self.version_line.text())
+
+        elif self.default_custom.isChecked():
+            filename["version"] = str(self.version_line.text())
 
         return self.set_results()
 
     def set_extension(self):
-        filename["extension"] = self.extension_combo.currentText()
+        if self.default_ma.isChecked():
+            filename["extension"] = self.extension_combo.currentText()
+
+        elif self.default_mezz.isChecked():
+            filename_mezz["extension"] = self.extension_combo.currentText()
+
+        elif self.default_custom.isChecked():
+            filename["extension"] = self.extension_combo.currentText()
 
         return self.set_results()
 
@@ -798,31 +845,65 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             filename["audio_config"] += \
             [y for x, y in app_lists.AUDIO_CONFIGS if x == self.audio_configs.values()[index]][0] + "-"
 
+        filename_mezz["audio_config"] = ""
+        for index in range(len(self.audio_configs.values())):
+            filename_mezz["audio_config"] += \
+                [y for x, y in app_lists.AUDIO_CONFIGS if x == self.audio_configs.values()[index]][0] + "-"
+        head, sep, tail = filename_mezz["audio_config"].rpartition("-")
+        filename_mezz["audio_config"] = head + "_"
+
         return self.set_results()
 
     def set_results(self):
-        # if self.default_ma.isChecked():
-        temp_filename = ""
-        self.results_line.clear()
-
-        for key in filename.keys():
-            temp_filename += str(filename[key])
-
-        if os.path.splitext(temp_filename)[0].endswith("_"):
-            final_filename = os.path.splitext(temp_filename)[0][:-1] + filename["extension"]
-
-        else:
-            final_filename = temp_filename
-
-        self.results_line.insert(final_filename)
-
         if self.default_ma.isChecked():
+            temp_filename = ""
+            self.results_line.clear()
+
+            for key in filename.keys():
+                temp_filename += str(filename[key])
+
+            if os.path.splitext(temp_filename)[0].endswith("_"):
+                final_filename = os.path.splitext(temp_filename)[0][:-1] + filename["extension"]
+
+            else:
+                final_filename = temp_filename
+
+            self.results_line.insert(final_filename)
+
             self.validate_ma()
 
         if self.default_mezz.isChecked():
+            temp_filename = ""
+            self.results_line.clear()
+
+            for key in filename_mezz.keys():
+                temp_filename += str(filename_mezz[key])
+
+            if os.path.splitext(temp_filename)[0].endswith("_"):
+                final_filename = os.path.splitext(temp_filename)[0][:-1] + filename_mezz["extension"]
+
+            else:
+                final_filename = temp_filename
+
+            self.results_line.insert(final_filename)
+
             self.validate_mezz()
 
         if self.default_custom.isChecked():
+            temp_filename = ""
+            self.results_line.clear()
+
+            for key in filename.keys():
+                temp_filename += str(filename[key])
+
+            if os.path.splitext(temp_filename)[0].endswith("_"):
+                final_filename = os.path.splitext(temp_filename)[0][:-1] + filename["extension"]
+
+            else:
+                final_filename = temp_filename
+
+            self.results_line.insert(final_filename)
+
             self.validate_custom()
 
     def validate_ma(self):
@@ -842,18 +923,8 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def validate_mezz(self):
         self.validation_text.clear()
 
-        if not filename["title"]:
+        if filename_mezz["title"] == "_":
             self.validation_text.appendPlainText("Title missing.")
-
-        if not filename["reel"]:
-            self.validation_text.appendPlainText("Reel # missing.")
-
-        else:
-            try:
-                int(filename["reel"])
-
-            except ValueError:
-                self.validation_text.appendPlainText("Reel # is not a valid number.")
 
         self.character_count()
 

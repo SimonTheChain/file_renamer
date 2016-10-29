@@ -66,26 +66,26 @@ CUSTOM_NOTES = [
 
 
 CUSTOM_CONTENT = [
-    ("Feature", "FTR", "FTR"),
-    ("Trailer", "TLR", "TRL"),
-    ("Teaser", "TSR", "TSR"),
-    ("Episodic (Sxxx_Exxx)", "S", "S"),
-    ("Volume (VOLxxx_Exxx)", "VOL", "VOL"),
-    ("Electronic Press Kit", "EPK", "EPK"),
-    ("Deleted Scenes", "SCEN", "SCEN"),
-    ("Bloopers", "BLO", "BLO"),
-    ("Making-of", "MKO", "MKO"),
-    ("Featurette", "FTT", "FTT"),
-    ("Behind the Scenes", "BTS", "BTS"),
-    ("Interview", "ITV", "ITV"),
-    ("Audio Commentary", "COM", "COM"),
-    ("Music Video", "MUS", "MUS"),
-    ("Clip", "CLP", "CLP"),
-    ("Preview", "PVW", "PVW"),
-    ("Rating Card", "RTC", "RTC"),
-    ("15s Spot", "ADV15", "ADV15"),
-    ("30s Spot", "ADV30", "ADV30"),
-    ("60s Spot", "ADV60", "ADV60")
+    ("Feature", "FTR", "ftr"),
+    ("Trailer", "TLR", "trl"),
+    ("Teaser", "TSR", "tsr"),
+    ("Episodic (Sxxx_Exxx)", "S", "s"),
+    ("Volume (VOLxxx_Exxx)", "VOL", "vol"),
+    ("Electronic Press Kit", "EPK", "epk"),
+    ("Deleted Scenes", "SCEN", "scen"),
+    ("Bloopers", "BLO", "blo"),
+    ("Making-of", "MKO", "mko"),
+    ("Featurette", "FTT", "ftt"),
+    ("Behind the Scenes", "BTS", "bts"),
+    ("Interview", "ITV", "itv"),
+    ("Audio Commentary", "COM", "com"),
+    ("Music Video", "MUS", "mus"),
+    ("Clip", "CLP", "clp"),
+    ("Preview", "PVW", "pvw"),
+    ("Rating Card", "RTC", "rtc"),
+    ("15s Spot", "ADV15", "adv15"),
+    ("30s Spot", "ADV30", "adv30"),
+    ("60s Spot", "ADV60", "adv60")
 ]
 
 
@@ -119,15 +119,15 @@ MEZZ_RESOLUTIONS = [
 
 
 CUSTOM_RESOLUTIONS = [
-    ("1920x1080", "1080", "hd"),
-    ("1280x720", "720", "hd720"),
-    ("NTSC 16:9 SD", "NTSC16", "NTSC16"),
-    ("NTSC 4:3 SD", "NTSC43", "NTSC43"),
-    ("PAL 16:9 SD", "PAL16", "PAL16"),
-    ("PAL 4:3 SD", "PAL43", "PAL43"),
-    ("4K", "4K", "4K"),
-    ("2K", "2K", "2K"),
-    ("UHD", "UHD", "UHD"),
+    ("1920x1080", "1080", "hd-"),
+    ("1280x720", "720", "hd720-"),
+    ("NTSC 16:9 SD", "NTSC16", "ntsc16-"),
+    ("NTSC 4:3 SD", "NTSC43", "ntsc43-"),
+    ("PAL 16:9 SD", "PAL16", "pal16-"),
+    ("PAL 4:3 SD", "PAL43", "pal43-"),
+    ("4K", "4K", "4k-"),
+    ("2K", "2K", "2k-"),
+    ("UHD", "UHD", "uhd-"),
 ]
 
 
