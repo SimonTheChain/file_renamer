@@ -205,10 +205,6 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             index_extension = self.extension_combo.findText(temp_extension)
             self.extension_combo.setCurrentIndex(index_extension)
 
-        self.set_title()
-        self.set_year()
-        self.set_reel()
-
     def set_default_mezz(self):
         self.year_lbl.setEnabled(False)
         self.sub_notes_combo.setEnabled(False)
@@ -308,262 +304,164 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             index_extension = self.extension_combo.findText(temp_extension)
             self.extension_combo.setCurrentIndex(index_extension)
 
-        self.set_title()
-        self.set_year()
-        self.set_reel()
-
     def set_title(self):
-        if self.default_ma.isChecked():
-            filename["title"] = str(self.title_line.text()).upper().replace(" ", "") + "_"
-
-        elif self.default_mezz.isChecked():
-            filename_mezz["title"] = str(self.title_line.text()).lower().replace(" ", "_") + "_"
+        filename["title"] = str(self.title_line.text()).upper().replace(" ", "") + "_"
+        filename_mezz["title"] = str(self.title_line.text()).lower().replace(" ", "_") + "_"
 
         return self.set_results()
 
     def set_year(self):
-        if self.default_ma.isChecked():
-            filename["year"] = str(self.year_lbl.date().toPyDate())[:4] + "_"
+        filename["year"] = str(self.year_lbl.date().toPyDate())[:4] + "_"
 
         return self.set_results()
 
     def set_notes(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["notes"] = \
-                    [y for x, y, z in app_lists.CUSTOM_NOTES if x == self.notes_combo.currentText()][0]
-                self.set_results()
+        try:
+            filename["notes"] = \
+                [y for x, y, z in app_lists.CUSTOM_NOTES if x == self.notes_combo.currentText()][0]
+            filename_mezz["notes"] = \
+                [z for x, y, z in app_lists.CUSTOM_NOTES if x == self.notes_combo.currentText()][0]
+            self.set_results()
 
-            except IndexError:
-                return
+        except IndexError:
+            return
 
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["notes"] = \
-                    [z for x, y, z in app_lists.CUSTOM_NOTES if x == self.notes_combo.currentText()][0]
-                self.set_results()
-
-            except IndexError:
-                return
-    
     def set_content(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["content"] = \
-                    [y for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0] + "_"
-                self.set_results()
+        try:
+            filename["content"] = \
+                [y for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0] + "_"
+            filename_mezz["content"] = \
+                [z for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0] + "_"
+            self.set_results()
 
-            except IndexError:
-                return
+        except IndexError:
+            return
 
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["content"] = \
-                    [z for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0] + "_"
-                self.set_results()
-
-            except IndexError:
-                return
-    
     def set_trailer_nb(self):
-        if self.default_ma.isChecked():
-            filename["trailer_nb"] = str(self.trailer_nb_line.text())
-
-        elif self.default_mezz.isChecked():
-            filename_mezz["trailer_nb"] = str(self.trailer_nb_line.text())
+        filename["trailer_nb"] = str(self.trailer_nb_line.text())
+        filename_mezz["trailer_nb"] = str(self.trailer_nb_line.text())
 
         return self.set_results()
 
     def set_trailer_pass(self):
-        if self.default_ma.isChecked():
-            filename["trailer_pass"] = str(self.trailer_pass_line.text())
-
-        elif self.default_mezz.isChecked():
-            filename_mezz["trailer_pass"] = str(self.trailer_pass_line.text())
+        filename["trailer_pass"] = str(self.trailer_pass_line.text())
+        filename_mezz["trailer_pass"] = str(self.trailer_pass_line.text())
 
         return self.set_results()
 
     def set_season_nb(self):
-        if self.default_ma.isChecked():
-            filename["season_nb"] = str(self.season_nb_line.text())
-
-        elif self.default_mezz.isChecked():
-            filename_mezz["season_nb"] = str(self.season_nb_line.text())
+        filename["season_nb"] = str(self.season_nb_line.text())
+        filename_mezz["season_nb"] = str(self.season_nb_line.text())
 
         return self.set_results()
 
     def set_episode_nb(self):
-        if self.default_ma.isChecked():
-            filename["episode_nb"] = str(self.episode_nb_line.text())
-
-        elif self.default_mezz.isChecked():
-            filename_mezz["episode_nb"] = str(self.episode_nb_line.text())
+        filename["episode_nb"] = str(self.episode_nb_line.text())
+        filename_mezz["episode_nb"] = str(self.episode_nb_line.text())
 
         return self.set_results()
 
     def set_reel(self):
-        if self.default_ma.isChecked():
-            filename["reel"] = "R" + str(self.reel_line.text()).replace(" ", "") + "_"
+        filename["reel"] = "R" + str(self.reel_line.text()).replace(" ", "") + "_"
 
         return self.set_results()
 
     def set_codec(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["codec"] = \
-                    [y for x, y in app_lists.CODECS if x == self.codec_combo.currentText()][0] + "_"
-                self.set_results()
+        try:
+            filename["codec"] = \
+                [y for x, y in app_lists.CODECS if x == self.codec_combo.currentText()][0] + "_"
+            filename_mezz["codec"] = \
+                [y for x, y in app_lists.CODECS if x == self.codec_combo.currentText()][0].lower() + "_"
+            self.set_results()
 
-            except IndexError:
-                return
-
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["codec"] = \
-                    [y for x, y in app_lists.CODECS if x == self.codec_combo.currentText()][0].lower() + "_"
-                self.set_results()
-
-            except IndexError:
-                return
+        except IndexError:
+            return
 
     def set_speed(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["speed"] = \
-                    [y for x, y in app_lists.SPEED if x == self.speed_combo.currentText()][0] + "_"
-                self.set_results()
+        try:
+            filename["speed"] = \
+                [y for x, y in app_lists.SPEED if x == self.speed_combo.currentText()][0] + "_"
+            filename_mezz["speed"] = \
+                [y for x, y in app_lists.SPEED if x == self.speed_combo.currentText()][0] + "_"
+            self.set_results()
 
-            except IndexError:
-                return
-
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["speed"] = \
-                    [y for x, y in app_lists.SPEED if x == self.speed_combo.currentText()][0] + "_"
-                self.set_results()
-
-            except IndexError:
-                return
+        except IndexError:
+            return
 
     def set_audio_language(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["audio_language"] = \
-                    [y for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "-"
-                self.set_results()
+        try:
+            filename["audio_language"] = \
+                [y for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "-"
+            filename_mezz["audio_language"] = \
+                [z for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "-"
+            self.set_results()
 
-            except IndexError:
-                return
-
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["audio_language"] = \
-                    [z for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "-"
-                self.set_results()
-
-            except IndexError:
-                return
+        except IndexError:
+            return
 
     def set_sub_language(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["sub_language"] = \
-                    [z for x, y, z in app_lists.LANGUAGES if x == self.sub_language_combo.currentText()][0] + "_"
-                self.set_results()
+        try:
+            filename["sub_language"] = \
+                [z for x, y, z in app_lists.LANGUAGES if x == self.sub_language_combo.currentText()][0] + "_"
+            filename_mezz["sub_language"] = \
+                [y for x, y, z in app_lists.LANGUAGES if x == self.sub_language_combo.currentText()][0] + "_"
+            self.set_results()
 
-            except IndexError:
-                return
-
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["sub_language"] = \
-                    [y for x, y, z in app_lists.LANGUAGES if x == self.sub_language_combo.currentText()][0] + "_"
-                self.set_results()
-
-            except IndexError:
-                return
+        except IndexError:
+            return
 
     def set_sub_notes(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["sub_notes"] = \
-                    [y for x, y in app_lists.SUB_NOTES if x == self.sub_notes_combo.currentText()][0]
-                self.set_results()
+        try:
+            filename["sub_notes"] = \
+                [y for x, y in app_lists.SUB_NOTES if x == self.sub_notes_combo.currentText()][0]
+            filename_mezz["sub_notes"] = \
+                [y for x, y in app_lists.SUB_NOTES if x == self.sub_notes_combo.currentText()][0]
+            self.set_results()
 
-            except IndexError:
-                return
-
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["sub_notes"] = \
-                    [y for x, y in app_lists.SUB_NOTES if x == self.sub_notes_combo.currentText()][0]
-                self.set_results()
-
-            except IndexError:
-                return
+        except IndexError:
+            return
 
     def set_resolution(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["resolution"] = \
-                    [y for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0] + "-"
-                self.set_results()
+        try:
+            filename["resolution"] = \
+                [y for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0] + "-"
+            filename_mezz["resolution"] = \
+                [z for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0]
+            self.set_results()
 
-            except IndexError:
-                return
-
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["resolution"] = \
-                    [z for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0]
-                self.set_results()
-
-            except IndexError:
-                return
+        except IndexError:
+            return
 
     def set_ratio(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["ratio"] = \
-                    [y for x, y in app_lists.RATIOS if x == self.ratio_combo.currentText()][0] + "_"
-                self.set_results()
+        try:
+            filename["ratio"] = \
+                [y for x, y in app_lists.RATIOS if x == self.ratio_combo.currentText()][0] + "_"
+            filename_mezz["ratio"] = \
+                [y for x, y in app_lists.RATIOS if x == self.ratio_combo.currentText()][0] + "_"
+            self.set_results()
 
-            except IndexError:
-                return
-
-        elif self.default_mezz.isChecked():
-            try:
-                filename_mezz["ratio"] = \
-                    [y for x, y in app_lists.RATIOS if x == self.ratio_combo.currentText()][0] + "_"
-                self.set_results()
-
-            except IndexError:
-                return
+        except IndexError:
+            return
 
     def set_version(self):
-        if self.default_mezz.isChecked():
-            filename_mezz["version"] = str(self.version_line.text()).lower()
+        filename_mezz["version"] = str(self.version_line.text()).lower()
 
         return self.set_results()
 
     def set_extension(self):
-        if self.default_ma.isChecked():
-            filename["extension"] = self.extension_combo.currentText()
-
-        elif self.default_mezz.isChecked():
-            filename_mezz["extension"] = self.extension_combo.currentText()
+        filename["extension"] = self.extension_combo.currentText()
+        filename_mezz["extension"] = self.extension_combo.currentText()
 
         return self.set_results()
 
     def set_facility(self):
-        if self.default_ma.isChecked():
-            try:
-                filename["facility"] = \
-                    [y for x, y in app_lists.FACILITY if x == unicode(self.facility_combo.currentText())][0]
-                self.set_results()
+        try:
+            filename["facility"] = \
+                [y for x, y in app_lists.FACILITY if x == unicode(self.facility_combo.currentText())][0]
+            self.set_results()
 
-            except IndexError:
-                return
+        except IndexError:
+            return
 
     def add_audio(self):
         box = QtGui.QComboBox(self)
