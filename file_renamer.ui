@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>999</width>
-    <height>679</height>
+    <height>712</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -563,13 +563,6 @@
          </property>
          <property name="text">
           <string>Mezz</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="default_custom">
-         <property name="text">
-          <string>Custom</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -1484,7 +1477,7 @@
      <x>0</x>
      <y>0</y>
      <width>999</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
