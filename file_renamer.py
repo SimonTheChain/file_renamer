@@ -783,7 +783,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         if self.default_ma.isChecked():
             try:
                 filename["facility"] = \
-                    [y for x, y in app_lists.FACILITY if x == self.facility_combo.currentText()][0]
+                    [y for x, y in app_lists.FACILITY if x == unicode(self.facility_combo.currentText())][0]
                 self.set_results()
 
             except IndexError:
@@ -792,7 +792,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         elif self.default_mezz.isChecked():
             try:
                 filename_mezz["facility"] = \
-                    [y for x, y in app_lists.FACILITY if x == self.facility_combo.currentText()][0]
+                    [y for x, y in app_lists.FACILITY if x == unicode(self.facility_combo.currentText())][0]
                 self.set_results()
 
             except IndexError:
@@ -801,7 +801,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         elif self.default_custom.isChecked():
             try:
                 filename["facility"] = \
-                    [x for x, y in app_lists.FACILITY if x == self.facility_combo.currentText()][0]
+                    [x for x, y in app_lists.FACILITY if x == unicode(self.facility_combo.currentText())][0]
                 self.set_results()
 
             except IndexError:
