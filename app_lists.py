@@ -211,7 +211,7 @@ CUSTOM_EXTENSIONS = [
 
 
 FACILITY = [
-    ("Montréal", "MTL"),
+    (unicode("Montréal", encoding="utf-8"), unicode("MTL", encoding="utf-8")),
     ("Pinewood", "PNW"),
     ("Sydney", "SYD"),
     ("Glendale", "GLE"),
