@@ -6,13 +6,12 @@
 # Author: Simon Lachaîne
 
 
-import os
-import sys
-from collections import OrderedDict
-import re
 import datetime
-
+import os
+import re
+import sys
 from PyQt4 import QtCore, QtGui
+from collections import OrderedDict
 
 import app_lists
 import ui_file_renamer as main_frame
@@ -57,7 +56,6 @@ filename_mezz = OrderedDict([
     ("audio_language", ""),
     ("audio_config", ""),
     ("sub_language", ""),
-    ("sub_notes", ""),
     ("date", ""),
     ("version", ""),
     ("extension", ""),
@@ -73,9 +71,11 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         self.setupUi(self)
 
+        # gets the current date
         filename["date"] = str(datetime.date.today()).replace("-", "") + "-"
         filename_mezz["date"] = str(datetime.date.today()).replace("-", "") + "_"
 
+        # connects the widgets to functions
         self.default_ma.toggled.connect(self.set_default_ma)
         self.default_mezz.toggled.connect(self.set_default_mezz)
 
@@ -103,7 +103,18 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         self.copy_btn.clicked.connect(self.copy_filename)
 
+        # need to activate this prior to showing the ui
         self.default_ma.toggle()
+
+        # sets the default values
+        self.reel_line.setText("0")
+        self.version_line.setText("v1r0")
+        index_codec_default = self.codec_combo.findText("ProRes 422 HQ")
+        self.codec_combo.setCurrentIndex(index_codec_default)
+        index_ratio_default = self.ratio_combo.findText("1.78:1")
+        self.ratio_combo.setCurrentIndex(index_ratio_default)
+        index_audio_language_default = self.audio_language_combo.findText("English (United States)")
+        self.audio_language_combo.setCurrentIndex(index_audio_language_default)
 
         self.show()
 
@@ -116,7 +127,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         temp_notes = self.notes_combo.currentText()
         self.notes_combo.clear()
-        self.notes_combo.addItems([(tup[0]) for tup in app_lists.CUSTOM_NOTES])
+        self.notes_combo.addItems([(tup[0]) for tup in app_lists.NOTES])
 
         if temp_notes in [self.notes_combo.itemText(i) for i in range(self.notes_combo.count())]:
             index_notes = self.notes_combo.findText(temp_notes)
@@ -124,7 +135,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         temp_content = self.content_combo.currentText()
         self.content_combo.clear()
-        self.content_combo.addItems([(tup[0]) for tup in app_lists.CUSTOM_CONTENT])
+        self.content_combo.addItems([(tup[0]) for tup in app_lists.CONTENT])
 
         if temp_content in [self.content_combo.itemText(i) for i in range(self.content_combo.count())]:
             index_content = self.content_combo.findText(temp_content)
@@ -140,7 +151,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         temp_resolution = self.resolution_combo.currentText()
         self.resolution_combo.clear()
-        self.resolution_combo.addItems(app_lists.MA_RESOLUTIONS)
+        self.resolution_combo.addItems([(tup[0]) for tup in app_lists.RESOLUTIONS])
 
         if temp_resolution in [self.resolution_combo.itemText(i) for i in range(self.resolution_combo.count())]:
             index_resolution = self.resolution_combo.findText(temp_resolution)
@@ -199,11 +210,15 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         temp_extension = self.extension_combo.currentText()
         self.extension_combo.clear()
-        self.extension_combo.addItems(app_lists.CUSTOM_EXTENSIONS)
+        self.extension_combo.addItems(app_lists.EXTENSIONS)
 
         if temp_extension in [self.extension_combo.itemText(i) for i in range(self.extension_combo.count())]:
             index_extension = self.extension_combo.findText(temp_extension)
             self.extension_combo.setCurrentIndex(index_extension)
+
+        self.set_title()
+        self.set_reel()
+        self.set_year()
 
     def set_default_mezz(self):
         self.year_lbl.setEnabled(False)
@@ -214,7 +229,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         temp_notes = self.notes_combo.currentText()
         self.notes_combo.clear()
-        self.notes_combo.addItems([(tup[0]) for tup in app_lists.CUSTOM_NOTES])
+        self.notes_combo.addItems([(tup[0]) for tup in app_lists.NOTES])
 
         if temp_notes in [self.notes_combo.itemText(i) for i in range(self.notes_combo.count())]:
             index_notes = self.notes_combo.findText(temp_notes)
@@ -222,7 +237,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         temp_content = self.content_combo.currentText()
         self.content_combo.clear()
-        self.content_combo.addItems([(tup[0]) for tup in app_lists.CUSTOM_CONTENT])
+        self.content_combo.addItems([(tup[0]) for tup in app_lists.CONTENT])
 
         if temp_content in [self.content_combo.itemText(i) for i in range(self.content_combo.count())]:
             index_content = self.content_combo.findText(temp_content)
@@ -238,7 +253,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         temp_resolution = self.resolution_combo.currentText()
         self.resolution_combo.clear()
-        self.resolution_combo.addItems(app_lists.MEZZ_RESOLUTIONS)
+        self.resolution_combo.addItems([(tup[0]) for tup in app_lists.RESOLUTIONS])
 
         if temp_resolution in [self.resolution_combo.itemText(i) for i in range(self.resolution_combo.count())]:
             index_resolution = self.resolution_combo.findText(temp_resolution)
@@ -262,7 +277,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
         temp_extension = self.extension_combo.currentText()
         self.extension_combo.clear()
-        self.extension_combo.addItems(app_lists.CUSTOM_EXTENSIONS)
+        self.extension_combo.addItems(app_lists.EXTENSIONS)
 
         temp_audio_language = self.audio_language_combo.currentText()
         self.audio_language_combo.clear()
@@ -304,6 +319,8 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             index_extension = self.extension_combo.findText(temp_extension)
             self.extension_combo.setCurrentIndex(index_extension)
 
+        self.set_title()
+
     def set_title(self):
         filename["title"] = str(self.title_line.text()).upper().replace(" ", "") + "_"
         filename_mezz["title"] = str(self.title_line.text()).lower().replace(" ", "_") + "_"
@@ -318,20 +335,25 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def set_notes(self):
         try:
             filename["notes"] = \
-                [y for x, y, z in app_lists.CUSTOM_NOTES if x == self.notes_combo.currentText()][0]
+                [y for x, y, z in app_lists.NOTES if x == self.notes_combo.currentText()][0] + "_"
             filename_mezz["notes"] = \
-                [z for x, y, z in app_lists.CUSTOM_NOTES if x == self.notes_combo.currentText()][0]
-            self.set_results()
+                [z for x, y, z in app_lists.NOTES if x == self.notes_combo.currentText()][0] + "_"
 
         except IndexError:
             return
 
+        if filename["notes"] == "_":
+            filename["notes"] = ""
+
+        return self.set_results()
+
     def set_content(self):
         try:
             filename["content"] = \
-                [y for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0] + "_"
+                [y for x, y, z in app_lists.CONTENT if x == self.content_combo.currentText()][0]
+
             filename_mezz["content"] = \
-                [z for x, y, z in app_lists.CUSTOM_CONTENT if x == self.content_combo.currentText()][0] + "_"
+                [z for x, y, z in app_lists.CONTENT if x == self.content_combo.currentText()][0] + "_"
             self.set_results()
 
         except IndexError:
@@ -413,20 +435,22 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def set_sub_notes(self):
         try:
             filename["sub_notes"] = \
-                [y for x, y in app_lists.SUB_NOTES if x == self.sub_notes_combo.currentText()][0]
-            filename_mezz["sub_notes"] = \
-                [y for x, y in app_lists.SUB_NOTES if x == self.sub_notes_combo.currentText()][0]
-            self.set_results()
+                [y for x, y in app_lists.SUB_NOTES if x == self.sub_notes_combo.currentText()][0] + "_"
 
         except IndexError:
             return
 
+        if filename["sub_notes"] == "_":
+            filename["sub_notes"] = ""
+
+        return self.set_results()
+
     def set_resolution(self):
         try:
             filename["resolution"] = \
-                [y for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0] + "-"
+                [y for x, y, z in app_lists.RESOLUTIONS if x == self.resolution_combo.currentText()][0] + "-"
             filename_mezz["resolution"] = \
-                [z for x, y, z in app_lists.CUSTOM_RESOLUTIONS if x == self.resolution_combo.currentText()][0]
+                [z for x, y, z in app_lists.RESOLUTIONS if x == self.resolution_combo.currentText()][0]
             self.set_results()
 
         except IndexError:
@@ -514,6 +538,22 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         if self.default_ma.isChecked():
             temp_filename = ""
             self.results_line.clear()
+
+            if not filename["trailer_nb"]:
+                if filename["content"].endswith("-"):
+                    filename["content"] = filename["content"][:-1]
+                    filename["content"] += "_"
+
+                elif filename["content"].endswith("_"):
+                    pass
+
+                else:
+                    filename["content"] += "_"
+
+            else:
+                if filename["content"].endswith("_"):
+                    filename["content"] = filename["content"][:-1]
+                    filename["content"] += "-"
 
             for key in filename.keys():
                 temp_filename += str(filename[key])

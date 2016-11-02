@@ -6,66 +6,66 @@
 # Author: Simon Lachaîne
 
 
-CUSTOM_NOTES = [
+NOTES = [
     ("", "", ""),
-    ("Airline", "AIR", "AIR"),
-    ("AU exclusive", "AUSx", "AUSx"),
-    ("Blu-ray exclusive", "BDx", "BDx"),
-    ("CAN exclusive", "CANx", "CANx"),
-    ("Censored", "CSR", "CSR"),
-    ("Clean VOD version", "VOD", "VOD"),
-    ("Library Version", "LIB", "LIB"),
-    ("Cinavia", "CINAVIA", "CINAVIA"),
-    ("Non-Cinavia", "NCINAVIA", "NCINAVIA"),
-    ("Director's Cut", "DIR", "DIR"),
-    ("Extended Cut", "EXT", "DNC"),
-    ("Downconvert", "DNC", "DNC"),
-    ("DVD exclusive", "DVDx", "DVDx"),
-    ("International", "INTL", "INTL"),
-    ("Unsubtitled", "UNSUB", "UNSUB"),
-    ("Pillarbox", "PBX", "PBX"),
-    ("Short Episode", "SHEP", "SHEP"),
-    ("Slate", "SLATE", "SLATE"),
-    ("SPA exclusive", "SPAx", "SPAx"),
-    ("Store exclusive", "STOREx", "STOREx"),
-    ("Textless", "TXTL", "TXTL"),
-    ("With Textless (Muse)", "WTXTL", "WTXTL"),
-    ("Theatre exclusive", "THRx", "THRx"),
-    ("UK exclusive", "UKx", "UKx"),
-    ("Unrated", "URT", "URT"),
-    ("Upconvert", "UPC", "UPC"),
-    ("US exclusive", "USAx", "USAx"),
-    ("Web exclusive", "WEBx", "WEBx"),
-    ("3D Left Eye", "3DLE", "3DLE"),
-    ("3D Right Eye", "3DRE", "3DRE"),
-    ("Graphical Content", "GRAC", "GRAC"),
+    ("Airline", "AIR", "air"),
+    ("AU exclusive", "AUSx", "ausx"),
+    ("Blu-ray exclusive", "BDx", "bdx"),
+    ("CAN exclusive", "CANx", "canx"),
+    ("Censored", "CSR", "csr"),
+    ("Clean VOD version", "VOD", "vod"),
+    ("Library Version", "LIB", "lib"),
+    ("Cinavia", "CINAVIA", "cinavia"),
+    ("Non-Cinavia", "NCINAVIA", "cinavia"),
+    ("Director's Cut", "DIR", "dir"),
+    ("Extended Cut", "EXT", "dnc"),  # should be ext instead of dnc
+    ("Downconvert", "DNC", "dnc"),
+    ("DVD exclusive", "DVDx", "dvdx"),
+    ("International", "INTL", "intl"),
+    ("Unsubtitled", "UNSUB", "unsub"),
+    ("Pillarbox", "PBX", "pbx"),
+    ("Short Episode", "SHEP", "shep"),
+    ("Slate", "SLATE", "slate"),
+    ("SPA exclusive", "SPAx", "spax"),
+    ("Store exclusive", "STOREx", "storex"),
+    ("Textless", "TXTL", "txtl"),
+    ("With Textless (Muse)", "WTXTL", "wtxtl"),
+    ("Theatre exclusive", "THRx", "thrx"),
+    ("UK exclusive", "UKx", "ukx"),
+    ("Unrated", "URT", "urt"),
+    ("Upconvert", "UPC", "upc"),
+    ("US exclusive", "USAx", "usax"),
+    ("Web exclusive", "WEBx", "webx"),
+    ("3D Left Eye", "3DLE", "3dle"),
+    ("3D Right Eye", "3DRE", "3dre"),
+    ("Graphical Content", "GRAC", "grac"),
     ("QC Report", "QC", "qc_report"),
-    ("Poster Art", "POSTER", "POSTER"),
-    ("Chapter Still 01", "CHAP01", "CHAP01"),
-    ("Chapter Still 02", "CHAP02", "CHAP02"),
-    ("Chapter Still 03", "CHAP03", "CHAP03"),
-    ("Chapter Still 04", "CHAP04", "CHAP04"),
-    ("Chapter Still 05", "CHAP05", "CHAP05"),
-    ("Chapter Still 06", "CHAP06", "CHAP06"),
-    ("Chapter Still 07", "CHAP07", "CHAP07"),
-    ("Chapter Still 08", "CHAP08", "CHAP08"),
-    ("Chapter Still 09", "CHAP09", "CHAP09"),
-    ("Chapter Still 10", "CHAP10", "CHAP10"),
-    ("Chapter Still 11", "CHAP11", "CHAP11"),
-    ("Chapter Still 12", "CHAP12", "CHAP12"),
-    ("Chapter Still 13", "CHAP13", "CHAP13"),
-    ("Chapter Still 14", "CHAP14", "CHAP14"),
-    ("Chapter Still 15", "CHAP15", "CHAP15"),
-    ("10 Minutes segment", "10M", "10M"),
-    ("15 Minutes segment", "15M", "15M"),
-    ("30 Minutes segment", "30M", "30M"),
-    ("60 Minutes segment", "60M", "60M"),
-    ("90 Minutes segment", "90M", "90M"),
-    ("120 Minutes segment", "120M", "120M"),
+    ("Poster Art", "POSTER", "poster"),
+    ("Chapter Still 01", "CHAP01", "chap01"),
+    ("Chapter Still 02", "CHAP02", "chap02"),
+    ("Chapter Still 03", "CHAP03", "chap03"),
+    ("Chapter Still 04", "CHAP04", "chap04"),
+    ("Chapter Still 05", "CHAP05", "chap05"),
+    ("Chapter Still 06", "CHAP06", "chap06"),
+    ("Chapter Still 07", "CHAP07", "chap07"),
+    ("Chapter Still 08", "CHAP08", "chap08"),
+    ("Chapter Still 09", "CHAP09", "chap09"),
+    ("Chapter Still 10", "CHAP10", "chap10"),
+    ("Chapter Still 11", "CHAP11", "chap11"),
+    ("Chapter Still 12", "CHAP12", "chap12"),
+    ("Chapter Still 13", "CHAP13", "chap13"),
+    ("Chapter Still 14", "CHAP14", "chap14"),
+    ("Chapter Still 15", "CHAP15", "chap15"),
+    ("10 Minutes segment", "10M", "10m"),
+    ("15 Minutes segment", "15M", "15m"),
+    ("30 Minutes segment", "30M", "30m"),
+    ("60 Minutes segment", "60M", "60m"),
+    ("90 Minutes segment", "90M", "90m"),
+    ("120 Minutes segment", "120M", "120m"),
 ]
 
 
-CUSTOM_CONTENT = [
+CONTENT = [
     ("Feature", "FTR", "ftr"),
     ("Trailer", "TLR", "trl"),
     ("Teaser", "TSR", "tsr"),
@@ -105,20 +105,20 @@ CODECS = [
 ]
 
 
-MA_RESOLUTIONS = [
-    "1920x1080",
-    "1280x720",
-]
+# MA_RESOLUTIONS = [
+#     "1920x1080",
+#     "1280x720",
+# ]
+#
+#
+# MEZZ_RESOLUTIONS = [
+#     "1280x720",
+#     "NTSC 16:9 SD",
+#     "NTSC 4:3 SD",
+# ]
 
 
-MEZZ_RESOLUTIONS = [
-    "1280x720",
-    "NTSC 16:9 SD",
-    "NTSC 4:3 SD",
-]
-
-
-CUSTOM_RESOLUTIONS = [
+RESOLUTIONS = [
     ("1920x1080", "1080", "hd-"),
     ("1280x720", "720", "hd720-"),
     ("NTSC 16:9 SD", "NTSC16", "ntsc16-"),
@@ -179,7 +179,7 @@ SUB_NOTES = [
 ]
 
 
-CUSTOM_EXTENSIONS = [
+EXTENSIONS = [
     ".mov",
     ".mxf",
     ".mp4",
@@ -211,7 +211,7 @@ CUSTOM_EXTENSIONS = [
 
 
 FACILITY = [
-    (unicode("Montréal", encoding="utf-8"), unicode("MTL", encoding="utf-8")),
+    (u"Montréal", "MTL"),
     ("Pinewood", "PNW"),
     ("Sydney", "SYD"),
     ("Glendale", "GLE"),

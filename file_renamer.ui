@@ -1502,6 +1502,34 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>default_ma</tabstop>
+  <tabstop>default_mezz</tabstop>
+  <tabstop>title_line</tabstop>
+  <tabstop>year_lbl</tabstop>
+  <tabstop>notes_combo</tabstop>
+  <tabstop>content_combo</tabstop>
+  <tabstop>trailer_nb_line</tabstop>
+  <tabstop>trailer_pass_line</tabstop>
+  <tabstop>season_nb_line</tabstop>
+  <tabstop>episode_nb_line</tabstop>
+  <tabstop>reel_line</tabstop>
+  <tabstop>version_line</tabstop>
+  <tabstop>codec_combo</tabstop>
+  <tabstop>resolution_combo</tabstop>
+  <tabstop>ratio_combo</tabstop>
+  <tabstop>speed_combo</tabstop>
+  <tabstop>audio_language_combo</tabstop>
+  <tabstop>sub_language_combo</tabstop>
+  <tabstop>sub_notes_combo</tabstop>
+  <tabstop>extension_combo</tabstop>
+  <tabstop>facility_combo</tabstop>
+  <tabstop>add_config_btn</tabstop>
+  <tabstop>del_config_btn</tabstop>
+  <tabstop>results_line</tabstop>
+  <tabstop>copy_btn</tabstop>
+  <tabstop>validation_text</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
