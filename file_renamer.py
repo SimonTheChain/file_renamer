@@ -15,6 +15,7 @@ from collections import OrderedDict
 
 import app_lists
 import ui_file_renamer as main_frame
+import file_renamer_about as about_dlg
 
 filename = OrderedDict([
     ("title", ""),
@@ -62,10 +63,18 @@ filename_mezz = OrderedDict([
 ])
 
 
+class AboutDlg(QtGui.QDialog, about_dlg.Ui_About):
+    def __init__(self, parent=None):
+        super(AboutDlg, self).__init__(parent)
+
+        self.setupUi(self)
+
+
 class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def __init__(self, parent=None):
         super(FileRenamerApp, self).__init__(parent)
 
+        # sets up the audio configs
         self.config_count = 0
         self.audio_configs = OrderedDict()
 
@@ -76,6 +85,9 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         filename_mezz["date"] = str(datetime.date.today()).replace("-", "") + "_"
 
         # connects the widgets to functions
+        self.actionAbout.triggered.connect(self.about_dlg)
+        self.actionQuit.triggered.connect(self.quit_fcn)
+
         self.default_ma.toggled.connect(self.set_default_ma)
         self.default_mezz.toggled.connect(self.set_default_mezz)
 
@@ -117,6 +129,14 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         self.audio_language_combo.setCurrentIndex(index_audio_language_default)
 
         self.show()
+
+    @staticmethod
+    def about_dlg():
+        about = AboutDlg()
+        about.exec_()
+
+    def quit_fcn(self):
+        self.close()
 
     def set_default_ma(self):
         self.year_lbl.setEnabled(True)
@@ -345,6 +365,9 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         if filename["notes"] == "_":
             filename["notes"] = ""
 
+        if filename_mezz["notes"] == "_":
+            filename_mezz["notes"] = ""
+
         return self.set_results()
 
     def set_content(self):
@@ -566,11 +589,27 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
             self.results_line.insert(final_filename)
 
-            self.validate_ma()
+            return self.validate_ma()
 
-        if self.default_mezz.isChecked():
+        elif self.default_mezz.isChecked():
             temp_filename = ""
             self.results_line.clear()
+
+            if not filename_mezz["trailer_nb"]:
+                if filename_mezz["content"].endswith("-"):
+                    filename_mezz["content"] = filename_mezz["content"][:-1]
+                    filename_mezz["content"] += "_"
+
+                elif filename_mezz["content"].endswith("_"):
+                    pass
+
+                else:
+                    filename_mezz["content"] += "_"
+
+            else:
+                if filename_mezz["content"].endswith("_"):
+                    filename_mezz["content"] = filename_mezz["content"][:-1]
+                    filename_mezz["content"] += "-"
 
             for key in filename_mezz.keys():
                 temp_filename += str(filename_mezz[key])
@@ -583,7 +622,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
             self.results_line.insert(final_filename)
 
-            self.validate_mezz()
+            return self.validate_mezz()
 
     def validate_ma(self):
         self.validation_text.clear()
