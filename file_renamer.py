@@ -660,6 +660,9 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def character_count(self):
         self.lcd.display(len(self.results_line.text()))
 
+        if len(self.results_line.text()) > 99:
+            self.validation_text.appendPlainText("Warning: the filename exceeds 99 characters.")
+
 
 def main():
     app = QtGui.QApplication(sys.argv)
