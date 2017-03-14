@@ -113,6 +113,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         self.add_config_btn.clicked.connect(self.add_audio)
         self.del_config_btn.clicked.connect(self.del_audio)
 
+        self.results_line.textChanged.connect(self.character_count)
         self.copy_btn.clicked.connect(self.copy_filename)
 
         # need to activate this prior to showing the ui
@@ -377,6 +378,19 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
             filename_mezz["content"] = \
                 [z for x, y, z in app_lists.CONTENT if x == self.content_combo.currentText()][0] + "_"
+
+            if filename["content"] == "FTR" or filename_mezz["content"] == "ftr_":
+                self.trailer_nb_line.setEnabled(False)
+                self.trailer_pass_line.setEnabled(False)
+                self.season_nb_line.setEnabled(False)
+                self.episode_nb_line.setEnabled(False)
+
+            else:
+                self.trailer_nb_line.setEnabled(True)
+                self.trailer_pass_line.setEnabled(True)
+                self.season_nb_line.setEnabled(True)
+                self.episode_nb_line.setEnabled(True)
+
             self.set_results()
 
         except IndexError:
@@ -436,9 +450,9 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def set_audio_language(self):
         try:
             filename["audio_language"] = \
-                [y for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "-"
+                [y for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "_"
             filename_mezz["audio_language"] = \
-                [z for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "-"
+                [z for x, y, z in app_lists.LANGUAGES if x == self.audio_language_combo.currentText()][0] + "_"
             self.set_results()
 
         except IndexError:
