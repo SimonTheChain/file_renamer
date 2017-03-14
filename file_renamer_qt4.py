@@ -10,7 +10,7 @@ import datetime
 import os
 import re
 import sys
-from PyQt5 import QtCore, QtGui
+from PyQt4 import QtCore, QtGui
 from collections import OrderedDict
 
 import app_lists
@@ -518,7 +518,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def set_facility(self):
         try:
             filename["facility"] = \
-                [y for x, y in app_lists.FACILITY if x == self.facility_combo.currentText()][0]
+                [y for x, y in app_lists.FACILITY if x == unicode(self.facility_combo.currentText())][0]
             self.set_results()
 
         except IndexError:
