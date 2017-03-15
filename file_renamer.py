@@ -10,12 +10,12 @@ import datetime
 import os
 import re
 import sys
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtWidgets
 from collections import OrderedDict
 
 import app_lists
-import ui_file_renamer as main_frame
-import file_renamer_about as about_dlg
+import filerenamer_ui as main_frame
+# import file_renamer_about as about_dlg
 
 filename = OrderedDict([
     ("title", ""),
@@ -63,14 +63,14 @@ filename_mezz = OrderedDict([
 ])
 
 
-class AboutDlg(QtGui.QDialog, about_dlg.Ui_About):
-    def __init__(self, parent=None):
-        super(AboutDlg, self).__init__(parent)
+# class AboutDlg(QtGui.QDialog, about_dlg.Ui_About):
+#     def __init__(self, parent=None):
+#         super(AboutDlg, self).__init__(parent)
+#
+#         self.setupUi(self)
 
-        self.setupUi(self)
 
-
-class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
+class FileRenamerApp(QtWidgets.QMainWindow, main_frame.Ui_FileRenamerWindow):
     def __init__(self, parent=None):
         super(FileRenamerApp, self).__init__(parent)
 
@@ -85,7 +85,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         filename_mezz["date"] = str(datetime.date.today()).replace("-", "") + "_"
 
         # connects the widgets to functions
-        self.actionAbout.triggered.connect(self.about_dlg)
+        # self.actionAbout.triggered.connect(self.about_dlg)
         self.actionQuit.triggered.connect(self.quit_fcn)
 
         self.default_ma.toggled.connect(self.set_default_ma)
@@ -129,12 +129,13 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         index_audio_language_default = self.audio_language_combo.findText("English (United States)")
         self.audio_language_combo.setCurrentIndex(index_audio_language_default)
 
+        self.resize(self.minimumSizeHint())
         self.show()
 
-    @staticmethod
-    def about_dlg():
-        about = AboutDlg()
-        about.exec_()
+    # @staticmethod
+    # def about_dlg():
+    #     about = AboutDlg()
+    #     about.exec_()
 
     def quit_fcn(self):
         self.close()
@@ -525,7 +526,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             return
 
     def add_audio(self):
-        box = QtGui.QComboBox(self)
+        box = QtWidgets.QComboBox(self)
         box.addItems([(tup[0]) for tup in sorted(app_lists.AUDIO_CONFIGS)])
         box.setObjectName("config%d" % self.config_count)
         box.currentIndexChanged.connect(self.set_audio_signal)
@@ -533,7 +534,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         box.setCurrentIndex(index_audio)
 
         self.audio_lyt.addWidget(box, 0, self.config_count)
-        self.config_count = len(self.audio_configs.keys())
+        self.config_count = len(list(self.audio_configs))
 
     def del_audio(self):
         if self.audio_lyt.count() > 0:
@@ -543,10 +544,10 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
             if widget:
                 widget.deleteLater()
 
-        if len(self.audio_configs.keys()) > 0:
-            self.audio_configs.pop(self.audio_configs.keys()[-1])
+        if len(list(self.audio_configs)) > 0:
+            self.audio_configs.pop(list(self.audio_configs)[-1])
 
-        self.config_count = len(self.audio_configs.keys())
+        self.config_count = len(list(self.audio_configs))
 
         return self.set_audio_config()
 
@@ -558,14 +559,14 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
     def set_audio_config(self):
         filename["audio_config"] = ""
-        for index in range(len(self.audio_configs.values())):
+        for index in range(len(list(self.audio_configs.values()))):
             filename["audio_config"] += \
-            [y for x, y in app_lists.AUDIO_CONFIGS if x == self.audio_configs.values()[index]][0] + "-"
+            [y for x, y in app_lists.AUDIO_CONFIGS if x == list(self.audio_configs.values())[index]][0] + "-"
 
         filename_mezz["audio_config"] = ""
-        for index in range(len(self.audio_configs.values())):
+        for index in range(len(list(self.audio_configs.values()))):
             filename_mezz["audio_config"] += \
-                [y for x, y in app_lists.AUDIO_CONFIGS if x == self.audio_configs.values()[index]][0] + "-"
+                [y for x, y in app_lists.AUDIO_CONFIGS if x == list(self.audio_configs.values())[index]][0] + "-"
         head, sep, tail = filename_mezz["audio_config"].rpartition("-")
         filename_mezz["audio_config"] = head + "_"
 
@@ -667,7 +668,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
         self.character_count()
 
     def copy_filename(self):
-        clipboard = QtGui.QApplication.clipboard()
+        clipboard = QtWidgets.QApplication.clipboard()
         clipboard.clear()
         clipboard.setText(self.results_line.text())
 
@@ -679,7 +680,7 @@ class FileRenamerApp(QtGui.QMainWindow, main_frame.Ui_FileRenamerWindow):
 
 
 def main():
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     gui = FileRenamerApp()
     sys.exit(app.exec_())
 
