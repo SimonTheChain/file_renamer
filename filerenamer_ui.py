@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_FileRenamerWindow(object):
     def setupUi(self, FileRenamerWindow):
         FileRenamerWindow.setObjectName("FileRenamerWindow")
-        FileRenamerWindow.resize(944, 690)
+        FileRenamerWindow.resize(944, 881)
         self.centralWidget = QtWidgets.QWidget(FileRenamerWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralWidget)
@@ -99,6 +99,11 @@ class Ui_FileRenamerWindow(object):
         self.horizontalLayout.addItem(spacerItem)
         self.gridLayout.addWidget(self.groupBox, 0, 0, 1, 2)
         self.frame_3 = QtWidgets.QFrame(self.centralWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
+        self.frame_3.setSizePolicy(sizePolicy)
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
@@ -392,7 +397,7 @@ class Ui_FileRenamerWindow(object):
 
     def retranslateUi(self, FileRenamerWindow):
         _translate = QtCore.QCoreApplication.translate
-        FileRenamerWindow.setWindowTitle(_translate("FileRenamerWindow", "FileRenamerWindow"))
+        FileRenamerWindow.setWindowTitle(_translate("FileRenamerWindow", "File Renamer"))
         self.year_lbl.setDisplayFormat(_translate("FileRenamerWindow", "yyyy"))
         self.label_10.setText(_translate("FileRenamerWindow", "Reel #"))
         self.label_7.setText(_translate("FileRenamerWindow", "Trailer pass #"))

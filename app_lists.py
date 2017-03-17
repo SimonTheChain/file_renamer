@@ -260,7 +260,7 @@ LANGUAGES = [
     ("Danish", "da", "DA"),
     ("Dutch (Belgium)", "nlBE", "nlBE"),
     ("Dutch (Netherlands)", "nlNL", "nlNL"),
-    ("English", "en", "----"),
+    ("English", "en", "en"),
     ("English (Australia)", "enAU", "enAU"),
     ("English (Canada)", "enCA", "enCA"),
     ("English (Ireland)", "enIE", "enIE"),
