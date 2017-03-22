@@ -18,7 +18,7 @@ NOTES = [
     ("Cinavia", "CINAVIA", "cinavia"),
     ("Non-Cinavia", "NCINAVIA", "cinavia"),
     ("Director's Cut", "DIR", "dir"),
-    ("Extended Cut", "EXT", "dnc"),  # should be ext instead of dnc
+    ("Extended Cut", "EXT", "ext"),  # Mezz: changed to ext instead of dnc
     ("Downconvert", "DNC", "dnc"),
     ("DVD exclusive", "DVDx", "dvdx"),
     ("International", "INTL", "intl"),
@@ -69,7 +69,7 @@ CONTENT = [
     ("Feature", "FTR", "ftr"),
     ("Trailer", "TLR", "trl"),
     ("Teaser", "TSR", "tsr"),
-    ("Episodic (Sxxx_Exxx)", "S", "s"),
+    ("Episodic (Sxxx_Exxx)", "", ""), # test
     ("Volume (VOLxxx_Exxx)", "VOL", "vol"),
     ("Electronic Press Kit", "EPK", "epk"),
     ("Deleted Scenes", "SCEN", "scen"),
@@ -271,7 +271,7 @@ LANGUAGES = [
     ("Fārsi", "fa", "FA"),
     ("Finnish", "fi", "FI"),
     ("Flemmish", "vl", "VL"),
-    ("French", "fr", "----"),
+    ("French", "fr", "fr"),
     ("French (Belgium)", "frBE", "frBE"),
     ("French (Canada)", "frCA", "frCA"),
     ("French (France)", "frFR", "frFR"),

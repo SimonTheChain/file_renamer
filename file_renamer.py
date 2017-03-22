@@ -404,13 +404,13 @@ class FileRenamerApp(QtWidgets.QMainWindow, main_frame.Ui_FileRenamerWindow):
         return self.set_results()
 
     def set_trailer_pass(self):
-        filename["trailer_pass"] = str(self.trailer_pass_line.text())
-        filename_mezz["trailer_pass"] = str(self.trailer_pass_line.text())
+        filename["trailer_pass"] = "-PASS" + str(self.trailer_pass_line.text()) + "_"
+        filename_mezz["trailer_pass"] = "-pass" + str(self.trailer_pass_line.text()) + "_"
 
         return self.set_results()
 
     def set_season_nb(self):
-        filename["season_nb"] = str(self.season_nb_line.text())
+        filename["season_nb"] = "S" + str(self.season_nb_line.text())
         filename_mezz["season_nb"] = str(self.season_nb_line.text())
 
         return self.set_results()
@@ -566,7 +566,7 @@ class FileRenamerApp(QtWidgets.QMainWindow, main_frame.Ui_FileRenamerWindow):
         filename_mezz["audio_config"] = ""
         for index in range(len(list(self.audio_configs.values()))):
             filename_mezz["audio_config"] += \
-                [y for x, y in app_lists.AUDIO_CONFIGS if x == list(self.audio_configs.values())[index]][0] + "-"
+                [y.lower() for x, y in app_lists.AUDIO_CONFIGS if x == list(self.audio_configs.values())[index]][0] + "-"
         head, sep, tail = filename_mezz["audio_config"].rpartition("-")
         filename_mezz["audio_config"] = head + "_"
 
